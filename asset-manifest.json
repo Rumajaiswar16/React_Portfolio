@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/React_Portfolio/static/css/main.057b77d8.css",
+    "main.js": "/React_Portfolio/static/js/main.7b81b935.js",
+    "static/js/453.7c460c09.chunk.js": "/React_Portfolio/static/js/453.7c460c09.chunk.js",
+    "static/media/elearning.png": "/React_Portfolio/static/media/elearning.2f130a69550b187540c4.png",
+    "static/media/mobirise.png": "/React_Portfolio/static/media/mobirise.5858b8f856e65f72f316.png",
+    "static/media/ruma.jpg": "/React_Portfolio/static/media/ruma.e28c0cfe369ce7e2295f.jpg",
+    "index.html": "/React_Portfolio/index.html",
+    "main.057b77d8.css.map": "/React_Portfolio/static/css/main.057b77d8.css.map",
+    "main.7b81b935.js.map": "/React_Portfolio/static/js/main.7b81b935.js.map",
+    "453.7c460c09.chunk.js.map": "/React_Portfolio/static/js/453.7c460c09.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.057b77d8.css",
+    "static/js/main.7b81b935.js"
+  ]
+}
