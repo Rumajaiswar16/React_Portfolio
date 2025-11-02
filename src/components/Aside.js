@@ -7,15 +7,19 @@ const Aside = ({
   handleNavClick,
 }) => {
   const navItems = [
-    { id: "home", label: "Home", icon: <i class="fa fa-home"></i> },
-    { id: "about", label: "About", icon: <i class="fa fa-user"></i> },
-    { id: "service", label: "Services", icon: <i class="fa fa-list"></i> },
+    { id: "home", label: "Home", icon: <i className="fa fa-home"></i> },
+    { id: "about", label: "About", icon: <i className="fa fa-user"></i> },
+    { id: "service", label: "Services", icon: <i className="fa fa-list"></i> },
     {
       id: "portfolio",
       label: "Portfolio",
-      icon: <i class="fa fa-briefcase"></i>,
+      icon: <i className="fa fa-briefcase"></i>,
     },
-    { id: "contact", label: "Contact", icon: <i class="fa fa-comments"></i> },
+    {
+      id: "contact",
+      label: "Contact",
+      icon: <i className="fa fa-comments"></i>,
+    },
   ];
 
   return (

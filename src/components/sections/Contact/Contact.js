@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import ContactInfo from "../ContactInfo";
-import ContactForm from "../ContactForm";
+import ContactSection from "./ContactSection";
+import EmailSection from "./EmailSection";
 
 const titleVariants = {
   hidden: { opacity: 0, y: -40 },
@@ -11,18 +11,6 @@ const titleVariants = {
     transition: {
       duration: 0.6,
       ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const subtitleVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
     },
   },
 };
@@ -55,55 +43,42 @@ const Contact = ({ activeSection }) => {
     const handleScroll = () => {
       const scrollTop = section.scrollTop;
 
-      if (scrollTop < 100 && !visibleElements.mainTitle) {
-        setVisibleElements((prev) => ({ ...prev, mainTitle: true }));
-        mainTitleControls.start("visible");
-        setTimeout(() => questionTitleControls.start("visible"), 200);
-        setTimeout(() => serviceSubtitleControls.start("visible"), 350);
-        setTimeout(
-          () => setVisibleElements((prev) => ({ ...prev, contactCards: true })),
-          400
-        );
-      }
+      setVisibleElements((prev) => {
+        const newState = { ...prev };
 
-      if (scrollTop > 200 && !visibleElements.emailTitle) {
-        setVisibleElements((prev) => ({
-          ...prev,
-          emailTitle: true,
-          responsiveSubtitle: true,
-          form: true,
-        }));
-        emailTitleControls.start("visible");
-        setTimeout(() => responsiveSubtitleControls.start("visible"), 150);
-      }
+        if (scrollTop < 100 && !prev.mainTitle) {
+          newState.mainTitle = true;
+        }
+
+        if (scrollTop > 200 && !prev.emailTitle) {
+          newState.emailTitle = true;
+          newState.responsiveSubtitle = true;
+          newState.form = true;
+        }
+
+        if (JSON.stringify(prev) !== JSON.stringify(newState)) {
+          return newState;
+        }
+        return prev;
+      });
     };
 
     if (isActive) {
       mainTitleControls.start("visible");
       setTimeout(() => questionTitleControls.start("visible"), 200);
       setTimeout(() => serviceSubtitleControls.start("visible"), 350);
-      setTimeout(
-        () => setVisibleElements((prev) => ({ ...prev, contactCards: true })),
-        400
-      );
+      setTimeout(() => {
+        setVisibleElements((prev) => ({ ...prev, contactCards: true }));
+      }, 400);
     }
 
     section.addEventListener("scroll", handleScroll);
-
     handleScroll();
 
     return () => {
       section.removeEventListener("scroll", handleScroll);
     };
-  }, [
-    isActive,
-    visibleElements,
-    mainTitleControls,
-    questionTitleControls,
-    serviceSubtitleControls,
-    emailTitleControls,
-    responsiveSubtitleControls,
-  ]);
+  }, [isActive]);
 
   useEffect(() => {
     if (!isActive) {
@@ -131,24 +106,47 @@ const Contact = ({ activeSection }) => {
     responsiveSubtitleControls,
   ]);
 
+  useEffect(() => {
+    const scrollTop = sectionRef.current?.scrollTop || 0;
+
+    if (scrollTop < 100 && visibleElements.mainTitle) {
+      mainTitleControls.start("visible");
+      setTimeout(() => questionTitleControls.start("visible"), 200);
+      setTimeout(() => serviceSubtitleControls.start("visible"), 350);
+    }
+
+    if (scrollTop > 200 && visibleElements.emailTitle) {
+      emailTitleControls.start("visible");
+      setTimeout(() => responsiveSubtitleControls.start("visible"), 150);
+    }
+  }, [
+    visibleElements.mainTitle,
+    visibleElements.emailTitle,
+    mainTitleControls,
+    questionTitleControls,
+    serviceSubtitleControls,
+    emailTitleControls,
+    responsiveSubtitleControls,
+  ]);
+
   const contactInfo = [
     {
-      icon: <i class="fa fa-phone"></i>,
+      icon: <i className="fa fa-phone"></i>,
       title: "Call Us On",
       content: "+91 7058424322",
     },
     {
-      icon: <i class="fa fa-map-marker-alt"></i>,
+      icon: <i className="fa fa-map-marker-alt"></i>,
       title: "Office",
       content: "Mumbai",
     },
     {
-      icon: <i class="fa fa-envelope"></i>,
+      icon: <i className="fa fa-envelope"></i>,
       title: "Email",
       content: "rumajaiswar1693@gmail.com",
     },
     {
-      icon: <i class="fa fa-globe-europe"></i>,
+      icon: <i className="fa fa-globe-europe"></i>,
       title: "Website",
       content: "www.domain.com",
     },
@@ -171,54 +169,20 @@ const Contact = ({ activeSection }) => {
           </motion.div>
         </div>
 
-        <motion.h3
-          className="contact-title padd-15"
-          variants={titleVariants}
-          initial="hidden"
-          animate={questionTitleControls}
-        >
-          Have You Any Questions ?
-        </motion.h3>
+        <ContactSection
+          questionTitleControls={questionTitleControls}
+          serviceSubtitleControls={serviceSubtitleControls}
+          contactInfo={contactInfo}
+          isActive={isActive}
+          visibleContactCards={visibleElements.contactCards}
+        />
 
-        <motion.h4
-          className="contact-sub-title padd-15"
-          variants={subtitleVariants}
-          initial="hidden"
-          animate={serviceSubtitleControls}
-        >
-          I'M AT YOUR SERVICES
-        </motion.h4>
-
-        <div className="row">
-          {contactInfo.map((info, idx) => (
-            <ContactInfo
-              key={idx}
-              {...info}
-              idx={idx}
-              isActive={isActive && visibleElements.contactCards}
-            />
-          ))}
-        </div>
-
-        <motion.h3
-          className="contact-title padd-15"
-          variants={titleVariants}
-          initial="hidden"
-          animate={emailTitleControls}
-        >
-          SEND ME AN EMAIL
-        </motion.h3>
-
-        <motion.h4
-          className="contact-sub-title padd-15"
-          variants={subtitleVariants}
-          initial="hidden"
-          animate={responsiveSubtitleControls}
-        >
-          I'M VERY RESPONSIVE TO MESSAGES
-        </motion.h4>
-
-        <ContactForm isActive={isActive && visibleElements.form} />
+        <EmailSection
+          emailTitleControls={emailTitleControls}
+          responsiveSubtitleControls={responsiveSubtitleControls}
+          isActive={isActive}
+          visibleForm={visibleElements.form}
+        />
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import React from "react";
-import PortfolioItem from "../PortfolioItem";
-import elearningImage from "../../images/elearning.png";
-import mobiriseImage from "../../images/mobirise.png";
+import PortfolioItem from "../Portfolio/PortfolioItem";
+import elearningImage from "../../../images/elearning.png";
+import mobiriseImage from "../../../images/mobirise.png";
 
 const Portfolio = ({ activeSection }) => {
   const isActive = activeSection === "portfolio";

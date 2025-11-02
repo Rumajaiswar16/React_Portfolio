@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import profileImage from "../../images/ruma.jpg";
+import profileImage from "../../../images/ruma.jpg";
 
 const Home = ({ activeSection, handleNavClick }) => {
   const [typedText, setTypedText] = useState("");

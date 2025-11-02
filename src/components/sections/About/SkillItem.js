@@ -5,11 +5,6 @@ const SkillItem = ({ name, percent }) => {
   const [displayPercent, setDisplayPercent] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  const countUpVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
-
   useEffect(() => {
     if (!isVisible) return;
 
@@ -29,9 +24,8 @@ const SkillItem = ({ name, percent }) => {
   return (
     <motion.div
       className="skill-item padd-15"
-      variants={countUpVariants}
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.3 }}
       onViewportEnter={() => setIsVisible(true)}
     >

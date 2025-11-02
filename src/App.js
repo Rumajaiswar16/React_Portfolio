@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Aside from "./components/Aside";
 import LoadingScreen from "./components/LoadingScreen";
-import Home from "./components/sections/Home";
-import About from "./components/sections/About";
-import Services from "./components/sections/Services";
-import Portfolio from "./components/sections/Portfolio";
-import Contact from "./components/sections/Contact";
+import Home from "./components/sections/Home/Home";
+import About from "./components/sections/About/About";
+import Services from "./components/sections/Services/Services";
+import Portfolio from "./components/sections/Portfolio/Portfolio";
+import Contact from "./components/sections/Contact/Contact";
 import StyleSwitcher from "./components/StyleSwitcher";
 import "./styles/App.css";
 

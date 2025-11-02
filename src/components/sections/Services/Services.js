@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceItem from "../ServiceItem";
+import ServiceItem from "../Services/ServiceItem";
 
 const Services = ({ activeSection }) => {
   const isActive = activeSection === "service";
