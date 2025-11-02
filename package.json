@@ -2,6 +2,7 @@
   "name": "digitaledge",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Rumajaiswar16.github.io/React_Portfolio",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@testing-library/dom": "^10.4.1",
@@ -12,7 +13,6 @@
     "aos": "^2.3.4",
     "bootstrap": "^5.3.8",
     "framer-motion": "^12.23.24",
-    "gh-pages": "^6.3.0",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -21,6 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
